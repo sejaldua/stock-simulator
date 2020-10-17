@@ -17,10 +17,6 @@ class App extends Component {
         };
     }
 
-    // handleSizeChanged = size => {
-    //   this.setState({ size });
-    // };
-
     callAPI() {
         fetch("http://localhost:6789/stocks")
             .then(res => res.text())
