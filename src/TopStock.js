@@ -14,13 +14,22 @@ class TopStock extends Component {
     getSign = () => {
         if (this.props.stock[1] === 0)
             return "";
-        return (this.props.stock[1] > 0) ? "+":"-";
+        return (this.props.stock[1] > 0) ? "+":"";
+    }
+
+    getColor = () => {
+        if (this.props.stock[1] > 0)
+            return "green";
+        else if (this.props.stock[1] < 0)
+            return "red";
+        else
+            return "white";
     }
 
     render() {
         return (
             <div class="topstock">
-                <p> {this.props.stock[0].toString()} ({this.getSign()}{this.props.stock[1].toString()}) </p>
+                <span> {this.props.stock[0].toString()}</span><span className={this.getColor()}> ({this.getSign()}{this.props.stock[1].toString()}) </span>
             </div>
         );
     }

@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  height: 100%;
 }
 
 .App-logo {
@@ -57,4 +58,12 @@
   padding: 0.5em;
   margin: 0.2em;
   display: inline-block;
+}
+
+.red {
+  color: rgb(241, 119, 119);
+}
+
+.green {
+  color: rgb(116, 240, 116);
 }
