@@ -42,6 +42,19 @@
   align-items: center;
   justify-content: center;
   background-color: #9dbac7;
+  overflow: scroll;
+}
+
+.subcontainer {
+  overflow-y: scroll;
 }
 
 
+.topstock {
+  background-color: #06122b;
+  color: white;
+  width: 100%;
+  padding: 0.5em;
+  margin: 0.2em;
+  display: inline-block;
+}
