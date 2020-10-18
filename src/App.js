@@ -12,6 +12,7 @@ class App extends Component {
         super(props);
         this.state = { 
           stocks: {},
+          data: {},
           rel_change: {},
           unfiltered: true,
           sectors: {},
@@ -28,11 +29,11 @@ class App extends Component {
       .then(res => res.json())
       .then(
         (result) => {
-          console.log("TESTING");
           this.setState({
             connection: "true",
             stocks: result
           });
+          this.extractData();
           if (this.state.unfiltered)
             this.filterBySectors();
           this.updateRelChange();
@@ -42,6 +43,24 @@ class App extends Component {
     componentDidMount() {
       this.getData();
       setInterval(this.getData, 3000);
+    }
+
+    extractData = () => {
+      var data = this.state.stocks["stocks"];
+      var data_by_stock = {};
+      var stock_name;
+      var t, p;
+      data.forEach(item => {
+        t = [];
+        p = [];
+        stock_name = item["name"];
+        item["prices"].forEach(elem => {
+          t.push(elem["time"]);
+          p.push(elem["price"]);
+        })
+        data_by_stock[stock_name] = {time: t, price: p};
+      });
+      this.setState({data: data_by_stock});
     }
 
     updateRelChange = () => {
@@ -61,7 +80,6 @@ class App extends Component {
         // new_stock_rel_change["curr"] = item["prices"][item["prices"].length-1]["price"];
         new_stock_rel_change["curr"] = item["prices"][0]["price"];
         new_stock_rel_change["delta"] = (((new_stock_rel_change["curr"] - new_stock_rel_change["orig"]) / new_stock_rel_change["orig"]) * 100).toFixed(2);
-        console.log(new_stock_rel_change);
         new_rel_change[stock_name] = new_stock_rel_change;
       })
       this.setState({rel_change: new_rel_change});
@@ -77,9 +95,9 @@ class App extends Component {
       items.sort(function(first, second) {
         return second[1] - first[1];
       });
-
       return items.slice(0, 10);
     }
+
 
     filterBySectors = () => {
       var data = this.state.stocks["stocks"];
@@ -88,13 +106,11 @@ class App extends Component {
       data.forEach(item => {
         sector_name = item["sector"];
         if (!(sector_name in this.state.sectors)) {
-          console.log("new sector");
           sectors[sector_name] = [];
         }
         sectors[sector_name].push(item["name"]);
         this.setState({sectors: sectors});
       });
-      console.log(sectors);
       this.setState({ unfiltered: false});
     }
 
@@ -127,12 +143,12 @@ class App extends Component {
                   <Tabs.Tab id="tab1" title="Top Stocks">
                     <div style={{ padding: "2px"}} className="subcontainer">
                       {this.getTopStocks().map(stock => (
-                        <TopStock stock = { stock } />
+                        <TopStock stock = { stock } data = { this.state.data[stock[0]] } />
                       ))}
                     </div>
                   </Tabs.Tab>
                   <Tabs.Tab id="tab2" title="By Sector">
-                    <SectorFilter rel_change = {this.state.rel_change} sectors = {this.state.sectors}/>
+                    <SectorFilter rel_change = {this.state.rel_change} sectors = {this.state.sectors} data = {this.state.data} />
                   </Tabs.Tab>
                 </Tabs>
                 {/* <p className="App-intro">{this.state.apiResponse}</p> */}

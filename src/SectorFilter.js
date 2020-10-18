@@ -11,9 +11,6 @@ const options = [
     { value: 4, label: 'Sector 4' }
   ];
 
-const d = {1: 'Sector 1', 2: 'Sector 2', 3: 'Sector 3', 4: 'Sector 4'};
-  
-
 class SectorFilter extends Component {
     constructor(props) {
         super(props);
@@ -24,14 +21,12 @@ class SectorFilter extends Component {
 
     onChange(value) {
         this.setState({ value });
-        console.log(this.state.value);
     }
 
     getSectors = () => {
         var sector_name = this.state.value.label;
         var dict = this.props.rel_change;
         var sector_stocks = this.props.sectors[sector_name];
-        console.log(dict);
         var items = [];
         sector_stocks.map(stock => {
             items.push([ stock, parseFloat(dict[stock]["delta"])]);
@@ -48,7 +43,7 @@ class SectorFilter extends Component {
             <div style={{ padding: "2px"}} className="subcontainer">
                 <Select options={options} value={this.state.value.value} onChange={this.onChange} />
                 {this.getSectors().map(stock => (
-                <TopStock stock = { stock } />
+                <TopStock stock = { stock } data = {this.props.data[stock[0]] } />
                 ))}
             </div>
         );

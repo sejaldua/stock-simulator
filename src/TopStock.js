@@ -1,13 +1,10 @@
 import React, { Component } from "react";
+import LineChart from "./Line.js";
 import "./App.css";
 
 class TopStock extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isShow: true,
-        };
-        console.log(this.props);
     }
 
 
@@ -29,7 +26,8 @@ class TopStock extends Component {
     render() {
         return (
             <div class="topstock">
-                <span> {this.props.stock[0].toString()}</span><span className={this.getColor()}> ({this.getSign()}{this.props.stock[1].toString()}) </span>
+                <span> {this.props.stock[0].toString()}</span><span className={this.getColor()}> ({this.getSign()}{this.props.stock[1].toString()}%) </span>
+                <LineChart ref="chart" data = { this.props.data }/>
             </div>
         );
     }
