@@ -37,10 +37,38 @@ class LineChart extends Component {
         }
       ],
     }
+    const options = {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+            display: false
+        },
+        tooltips: {
+            enabled: true
+        },
+        scales: {
+            xAxes: [
+            {
+                ticks: {
+                autoSkip: true,
+                maxTicksLimit: 10
+                }
+            }
+            ],
+            yAxes: [
+                {
+                    ticks: {
+                        autoSkip: true,
+                        maxTicksLimit: 5
+                    }
+                }
+            ]
+        }
+    }
 
     return (
         <article className="canvas-container">
-          <Line data={data} />
+          <Line data={data} options={options}/>
         </article>
     );
   }

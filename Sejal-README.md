@@ -11,11 +11,11 @@ start the server and `yarn start` to run the frontend React app.
 * `App.js`: where most of the codebase lives
 * `TopStock.js`: a React Component to display individual stock info (name and relative percent change)
 * `SectorFilter.js`: primarily used for the second tab (drop-down menu filter by sector)
-* `Chart.js`: broken right now :( but contains a hypothetical D3 Time Series viz
+* `Line.js`: real-time plotting of the stock fluctuations
 
 ## Notes
 
-Implementation Time: 5 hours  
-Functionality: 
-- One unfixed bug is related to the scrolling of the resizable window-- it shows up when adjusting the filters for the "By Sector" tab. The height of the container gets shortened, cutting off stock info.
-- I sadly wasn't able to get my D3 visualization to link to my React components properly :(, but if you don't mind, I am going to nerd out on this now that I am off the clock :). 
+Implementation Time: 4-5 hours (visualization wasn't fully working)  
+Total Time: 6-7 hours (switched from D3 --> react-chart-js2)  
+The code is messy! If I had more time, I would clean it up and refactor.  
+This was fun!
