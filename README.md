@@ -2,7 +2,7 @@
 
 ## Demo
 
-<img src="demo.gif" width="1000" height="600"/>
+<img src="demo.gif" width="1000" />
 
 ## Usage and Notes
 
