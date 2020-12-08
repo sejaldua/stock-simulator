@@ -1,4 +1,8 @@
-#stock-simulator
+# stock-simulator
+
+## Demo
+
+![](demo.gif)
 
 ## Usage and Notes
 
