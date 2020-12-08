@@ -2,7 +2,7 @@
 
 ## Demo
 
-![](demo.gif)
+<img src="demo.gif" width="400" height="400"/>
 
 ## Usage and Notes
 
